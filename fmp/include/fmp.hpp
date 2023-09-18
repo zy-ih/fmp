@@ -1,0 +1,1 @@
+constexpr auto test = 1;
