@@ -1,3 +1,4 @@
+#pragma once
 namespace fmp
 {
     /// @brief @c type_list 表示类型列表。

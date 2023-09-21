@@ -1,3 +1,4 @@
+#pragma once
 namespace fmp::core
 {
     /// @class constant_seq core.h "core.h"

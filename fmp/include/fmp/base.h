@@ -1,3 +1,4 @@
+#pragma once
 namespace fmp
 {
     template<template<typename...>typename F, typename... Ts>
