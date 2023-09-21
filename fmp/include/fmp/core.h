@@ -1,14 +1,33 @@
 namespace fmp::core
 {
-    template<auto ...vals>
+    /// @class constant_seq core.h "core.h"
+    /// @brief @c constant_seq 表示编译时常量序列。
+    /// @tparam ...vals 任意个常量序列
+    template<auto... vals>
     struct constant_seq
     {
+        /// @static
+        /// @brief 常量序列大小
         constexpr static auto size = static_cast<long long>(sizeof...(vals));
     };
 
-    template<long long ...vals>
+    /// @typedef
+    /// @brief @c index_seq 是 @code core::constant_seq<long long...> @endcode 别名
+    /// @tparam ...vals 编译时整数序列
+    /// @par example
+    /// @code
+    /// core::index_seq<0, 1, 2, 3, 4> 
+    /// @endcode
+    template<long long... vals>
     using index_seq = constant_seq<vals...>;
 
+    /// @brief @c seq_push_back 将常量加入到序列后面
+    /// @tparam S 表示序列
+    /// @tparam v 要加入的常量
+    /// @par example
+    /// @code
+    /// core::seq_push_back<core::constant_seq<1, 'x', 3.4>, -89>::type //core::constant_seq<1, 'x', 3.4, -89>
+    /// @endcode
     template<typename S, auto v>
     struct seq_push_back;
 
