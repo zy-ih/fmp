@@ -1,3 +1,8 @@
+#ifndef FMP_BASE_H
+#define FMP_BASE_H
+#endif // !FMP_BASE_H
+
+
 namespace fmp
 {
     template<template<typename...>typename F, typename... Ts>

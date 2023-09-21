@@ -1,3 +1,7 @@
+#ifndef FMP_LAZY_H
+#define FMP_LAZY_H
+#endif // !FMP_LAZY_H
+
 #include "algorithm.h"
 
 namespace fmp

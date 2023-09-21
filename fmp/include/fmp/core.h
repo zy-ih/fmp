@@ -1,3 +1,7 @@
+#ifndef FMP_CORE_H
+#define FMP_CORE_H
+#endif // !FMP_CORE_H
+
 namespace fmp::core
 {
     /// @class constant_seq core.h "core.h"

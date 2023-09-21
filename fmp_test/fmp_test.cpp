@@ -1,9 +1,4 @@
-﻿
-#include <iostream>
-#include <algorithm>
-#include <ranges>
-#include <fmp.hpp>
-
+﻿#include <fmp.hpp>
 
 int main()
 {
