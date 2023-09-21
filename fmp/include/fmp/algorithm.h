@@ -1,6 +1,4 @@
-#ifndef FMP_ALGORITHM_H
-#define FMP_ALGORITHM_H
-#endif // !FMP_ALGORITHM_H
+#pragma once
 
 #include "core.h"
 #include "base.h"

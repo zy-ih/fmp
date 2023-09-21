@@ -1,6 +1,4 @@
-#ifndef FMP_LAZY_H
-#define FMP_LAZY_H
-#endif // !FMP_LAZY_H
+#pragma once
 
 #include "algorithm.h"
 

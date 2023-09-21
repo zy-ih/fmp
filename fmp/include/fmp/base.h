@@ -1,7 +1,4 @@
-#ifndef FMP_BASE_H
-#define FMP_BASE_H
-#endif // !FMP_BASE_H
-
+#pragma once
 
 namespace fmp
 {

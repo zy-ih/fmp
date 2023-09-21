@@ -1,8 +1,4 @@
-#ifndef FMP_TYPE_LIST_H
-#define FMP_TYPE_LIST_H
-#endif // !FMP_TYPE_LIST_H
-
-
+#pragma once
 namespace fmp
 {
     /// @brief @c type_list 表示类型列表。

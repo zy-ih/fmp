@@ -1,6 +1,4 @@
-#ifndef FMP_CORE_H
-#define FMP_CORE_H
-#endif // !FMP_CORE_H
+#pragma once
 
 namespace fmp::core
 {
