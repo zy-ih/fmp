@@ -1,13 +1,19 @@
 ﻿#include <fmp.hpp>
-#include <vector>
 #include <list>
 #include <tuple>
+
 using namespace fmp;
-static_assert(is_template_instance_v<std::vector<int>, std::vector>);
-static_assert(is_template_instance_v<std::vector<double>, std::vector>);
-static_assert(is_template_instance_v<std::list<double>, std::list>);
-static_assert(is_template_instance_v<std::tuple<double>, std::tuple>);
+
+template<typename T>
+struct sizeof4
+{
+    constexpr static auto value = sizeof(T) == 4;
+};
 
 int main()
 {
+    constexpr lazy<type_list<int, double>>::append<char>::filter<sizeof4>::concat<repeat_t<int, 3, std::tuple>>::to<std::tuple>::type point4d{0, 2, 3, 4};
+
+    constexpr auto r = std::get<2>(point4d);
+
 }
