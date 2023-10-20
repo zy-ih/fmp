@@ -3,7 +3,7 @@
 #
 
 # 将源代码添加到此项目的可执行文件。
-add_executable (fmp_test "fmp_test.cpp" )
+add_executable (fmp_test "fmp_test.cpp")
 
 
 target_compile_features(fmp_test PUBLIC c_std_17 cxx_std_23)
