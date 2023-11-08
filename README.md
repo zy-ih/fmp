@@ -153,7 +153,6 @@ static_assert(std::is_same_v<type, std::tuple<int, char>>);
 using type = fmp::push_front<std::tuple<int>, char>::type;
 static_assert(std::is_same_v<type, std::tuple<char, int>>);
 ```
-Here is the markdown document you requested:
 
 #### range
 `range` generates an integer sequence from `start`, inclusive to `end`, exclusive with step size of `step`.
