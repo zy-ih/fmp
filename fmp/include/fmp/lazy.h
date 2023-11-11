@@ -67,6 +67,15 @@ namespace fmp
         using type = lazy<typename F<L>::type, FL...>::type;
 
         constexpr static auto size = fmp::size<type>::value;
+
+        template<template<typename>typename F>
+        constexpr static bool all_of = fmp::all_of<type, F>::value;
+
+        template<template<typename>typename F>
+        constexpr static bool any_of = fmp::any_of<type, F>::value;
+
+        template<template<typename>typename F>
+        constexpr static bool none_of = fmp::none_of<type, F>::value;
     };
 
     template<typename L>
@@ -124,6 +133,16 @@ namespace fmp
         using order = lazy<L, typename bind<fmp::order, S>::type>;
 
         using type = L;
+
         constexpr static auto size = fmp::size<type>::value;
+
+        template<template<typename>typename F>
+        constexpr static bool all_of = fmp::all_of<type, F>::value;
+
+        template<template<typename>typename F>
+        constexpr static bool any_of = fmp::any_of<type, F>::value;
+
+        template<template<typename>typename F>
+        constexpr static bool none_of = fmp::none_of<type, F>::value;
     };
 }

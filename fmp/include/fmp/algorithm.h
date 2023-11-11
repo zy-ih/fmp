@@ -245,4 +245,46 @@ namespace fmp
 
     template<typename L>
     using join_t = typename join<L>::type;
+
+    /// @brief @c all_of 判断类型序列中所有元素满足一元谓词F
+    /// @tparam L 类型序列
+    /// @tparam F 一元谓词
+    template<typename L, template<typename>typename F>
+    struct all_of;
+
+    template<template<typename...>typename LC, typename ...Ts, template<typename>typename F>
+    struct all_of<LC<Ts...>, F>
+    {
+        constexpr static bool value = (true && ... && F<Ts>::value);
+    };
+
+    template<typename L, template<typename>typename F>
+    inline constexpr bool all_of_v = all_of<L, F>::value;
+
+    /// @brief @c any_of 判断类型序列中至少有一个元素满足一元谓词F
+    /// @tparam L 类型序列
+    /// @tparam F 一元谓词
+    template<typename L, template<typename>typename F>
+    struct any_of;
+
+    template<template<typename...>typename LC, typename ...Ts, template<typename>typename F>
+    struct any_of<LC<Ts...>, F>
+    {
+        constexpr static bool value = (false || ... || F<Ts>::value);
+    };
+
+    template<typename L, template<typename>typename F>
+    inline constexpr bool any_of_v = any_of<L, F>::value;
+
+    /// @brief @c none_of 判断类型序列中所有元素都不满足一元谓词F
+    /// @tparam L 类型序列
+    /// @tparam F 一元谓词
+    template<typename L, template<typename>typename F>
+    struct none_of
+    {
+        constexpr static bool value = !any_of<L, F>::value;
+    };
+
+    template<typename L, template<typename>typename F>
+    inline constexpr bool none_of_v = none_of<L, F>::value;
 }

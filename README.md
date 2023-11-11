@@ -58,6 +58,18 @@ struct custom_bind
 ### Algorithm 
 The following implementations all have alias templates in xxx_t or xxx_v C++ Standard Template Library style.
 
+#### all_of
+`all_of` checks if unary predicate F returns true for all elements in the type list.
+```cpp
+static_assert(fmp::all_of<std::tuple<int, char, bool>, std::is_integral>::value);
+```
+
+#### any_of
+`any_of` checks if unary predicate F returns true for at least one element in the type list.
+```cpp
+static_assert(fmp::any_of<std::tuple<int, char *, bool, double>, std::is_integral>::value);
+```
+
 #### append
 `append` adds a type to the end of a type list.
 ```cpp
@@ -117,6 +129,12 @@ static_assert(std::is_same_v<type, int>);
 ```cpp
 using type = fmp::join<std::tuple<std::tuple<int>, std::tuple<char>>>::type;
 static_assert(std::is_same_v<type, std::tuple<int, char>>);
+```
+
+#### none_of
+`none_of` checks if unary predicate F returns true for no elements in the type list.
+```cpp
+static_assert(fmp::none_of<std::tuple<char *, std::string, double>, std::is_integral>::value);
 ```
 
 #### order
