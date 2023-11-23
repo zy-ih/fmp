@@ -65,6 +65,13 @@ namespace fmp
     template<typename L, template<typename, typename>typename F, typename I>
     struct fold;
 
+    template<template<typename, template<typename, typename>typename, typename>typename CF, template<typename, typename>typename F, typename I>
+    struct fold_bind
+    {
+        template<typename L>
+        using type = CF<L, F, I>;
+    };
+
     template<template<typename...>typename LC, typename T, typename...Ts, template<typename, typename>typename F, typename I>
         requires (... && requires{ typename F<I, Ts>::type; })
     struct fold<LC<T, Ts...>, F, I>
@@ -165,6 +172,13 @@ namespace fmp
     template<typename L, template<typename>typename F>
     struct filter;
 
+    template<template<typename, template<typename>typename>typename CF, template<typename>typename F>
+    struct filter_bind
+    {
+        template<typename L>
+        using type = CF<L, F>;
+    };
+
     template<template<typename...>typename LC, typename ...Ts, template<typename>typename F>
     struct filter<LC<Ts...>, F>
     {
@@ -180,6 +194,13 @@ namespace fmp
     /// @tparam F 函数模板，接受一个类型参数，返回一个类型
     template<typename L, template<typename>typename F>
     struct transform;
+
+    template<template<typename, template<typename>typename>typename CF, template<typename>typename F>
+    struct transform_bind
+    {
+        template<typename L>
+        using type = CF<L, F>;
+    };
 
     //(L<T0, T1, T2, ..., Tn>, T -> F<T>::type -> U) -> L<U0, U1, U2, ..., Un>
     template<template<typename...>typename LC, typename ...Ts, template<typename>typename F>

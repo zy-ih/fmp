@@ -23,7 +23,7 @@ namespace fmp
         using drop = lazy<L, F, FL..., bind_value<fmp::drop, count>::template type>;
 
         template<template<typename, typename>typename P, typename I>
-        using fold = lazy<L, F, FL..., bind_template<fmp::fold, P, I>::template type>;
+        using fold = lazy<L, F, FL..., fold_bind<fmp::fold, P, I>::template type>;
 
         template<typename T>
         using push_back = lazy<L, F, FL..., bind<fmp::push_back, T>::template type>;
@@ -38,10 +38,10 @@ namespace fmp
         using reverse = lazy<L, F, FL..., bind<fmp::reverse>::template type>;
 
         template<template<typename>typename P>
-        using filter = lazy<L, F, FL..., bind_template<fmp::filter, P>::template type>;
+        using filter = lazy<L, F, FL..., filter_bind<fmp::filter, P>::template type>;
 
         template<template<typename>typename P>
-        using transform = lazy<L, F, FL..., bind_template<fmp::transform, P>::template type>;
+        using transform = lazy<L, F, FL..., transform_bind<fmp::transform, P>::template type>;
 
         template<typename... Ls>
         using concat = lazy<L, F, FL..., bind<fmp::concat, Ls...>::template type>;
@@ -97,7 +97,7 @@ namespace fmp
         using drop = lazy<L, bind_value<fmp::drop, count>::template type>;
 
         template<template<typename, typename>typename P, typename I>
-        using fold = lazy<L, bind_template<fmp::fold, P, I>::template type>;
+        using fold = lazy<L, fold_bind<fmp::fold, P, I>::template type>;
 
         template<typename T>
         using push_back = lazy<L, bind<fmp::push_back, T>::template type>;
@@ -112,10 +112,10 @@ namespace fmp
         using reverse = lazy<L, bind<fmp::reverse>::template type>;
 
         template<template<typename>typename P>
-        using filter = lazy<L, bind_template<fmp::filter, P>::template type>;
+        using filter = lazy<L, filter_bind<fmp::filter, P>::template type>;
 
         template<template<typename>typename P>
-        using transform = lazy<L, bind_template<fmp::transform, P>::template type>;
+        using transform = lazy<L, transform_bind<fmp::transform, P>::template type>;
 
         template<typename... Ls>
         using concat = lazy<L, bind<fmp::concat, Ls...>::template type>;
