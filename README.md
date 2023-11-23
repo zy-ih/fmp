@@ -1,8 +1,8 @@
 ## fmp
 fmp is a functional-style C++ template metaprogramming library used for type transformation.
 
-It requires at least enabling the C++20 option as it makes use of concept syntax. 
-The library itself doesn't depend on any other library or even the standard library. 
+It requires at least enabling the **C++20** option as it makes use of concept syntax. 
+This library does not depend on any libraries other than the C++ standard library.
 All available functionalities are in the `fmp` namespace, and you only need to include "fmp/fmp.hpp" to use them.
 ### Sneak Peek
 ```cpp
@@ -47,10 +47,10 @@ Typically, type functions have several template parameters, with the first param
 Template parameters can be complex and varied. If you want to extend `lazy`, the existing variations of `bind` may not be sufficient, and you may need to define your own `bind`.
 ```cpp
 // Bind a constant and multiple template parameters to the type function F.
-template<typename F, long value, typename... Ts>
+template<template<typename, long, typename...>typename F, long value, typename... Ts>
 struct custom_bind
 {
-    // Note: There is usually only one type parameter here, which represents a type list.
+    //Note: There is usually only one type parameter here, which represents a type list.
     template<typename L>
     using type = F<L, value, Ts...>;
 };
@@ -89,6 +89,18 @@ static_assert(std::is_same_v<type, char>);
 ```cpp
 using type = fmp::concat<std::tuple<int, char>, std::tuple<double>, std::tuple<float>>::type;
 static_assert(std::is_same_v<type, std::tuple<int, char, double, float>>);
+```
+
+#### count
+`count` is used to calculate the number of the type in a type sequence.
+```cpp
+static_assert(fmp::count<std::tuple<int, char, double, int, int>, int>::value == 3);
+```
+
+#### count_if
+`count_if` is used to calculate the number of elements in a type sequence that satisfy a predicate;
+```cpp
+static_assert(fmp::count<std::tuple<int, float, double, int, int>, std::is_integral>::value == 3);
 ```
 
 #### drop

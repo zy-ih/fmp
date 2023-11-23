@@ -287,4 +287,34 @@ namespace fmp
 
     template<typename L, template<typename>typename F>
     inline constexpr bool none_of_v = none_of<L, F>::value;
+
+    /// @brief @c count 计算序列中类型 @c T 的个数
+    /// @tparam L 类型序列
+    /// @tparam T 
+    template<typename L, typename T>
+    class count
+    {
+        template<typename U>
+        struct same_as
+        {
+            constexpr static auto value = std::is_same<T, U>::value;
+        };
+    public:
+        constexpr static auto value = size<typename filter<L, same_as>::type>::value;
+    };
+    
+    template<typename L, typename T>
+    inline constexpr auto count_v = count<L, T>::value;
+
+    /// @brief @c count_if 计算序列中满足谓词 @c F 的元素个数
+    /// @tparam L 类型序列
+    /// @tparam F 一元谓词
+    template<typename L, template<typename>typename F>
+    struct count_if
+    {
+        constexpr static auto value = size<typename filter<L, F>::type>::value;
+    };
+
+    template<typename L, typename T>
+    inline constexpr auto count_if_v = count_if<L, T>::value;
 }

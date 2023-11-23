@@ -14,57 +14,63 @@ namespace fmp
     struct lazy<L, F, FL...>
     {
         template<long start, long end, long step = 1>
-        using range = lazy<L, F, FL..., typename bind_value<fmp::range, start, end, step>::type>;
+        using range = lazy<L, F, FL..., bind_value<fmp::range, start, end, step>::template type>;
 
         template<long count>
-        using take = lazy<L, F, FL..., typename bind_value<fmp::take, count>::type>;
+        using take = lazy<L, F, FL..., bind_value<fmp::take, count>::template type>;
 
         template<long count>
-        using drop = typename lazy<L, F, FL..., typename bind_value<fmp::drop, count>::type>;
+        using drop = lazy<L, F, FL..., bind_value<fmp::drop, count>::template type>;
 
         template<template<typename, typename>typename P, typename I>
-        using fold = typename lazy<L, F, FL..., typename bind_template<fmp::fold, P, I>::type>;
+        using fold = lazy<L, F, FL..., bind_template<fmp::fold, P, I>::template type>;
 
         template<typename T>
-        using push_back = lazy<L, F, FL..., typename bind<fmp::push_back, T>::type>;
+        using push_back = lazy<L, F, FL..., bind<fmp::push_back, T>::template type>;
 
         template<typename T>
-        using push_front = lazy<L, F, FL..., typename bind<fmp::push_front, T>::type>;
+        using push_front = lazy<L, F, FL..., bind<fmp::push_front, T>::template type>;
 
-        using pop_back = lazy<L, F, FL..., typename bind<fmp::pop_back>::type>;
+        using pop_back = lazy<L, F, FL..., bind<fmp::pop_back>::template type>;
 
-        using pop_front = lazy<L, F, FL..., typename bind<fmp::pop_front>::type>;
+        using pop_front = lazy<L, F, FL..., bind<fmp::pop_front>::template type>;
 
-        using reverse = lazy<L, F, FL..., typename bind<fmp::reverse>::type>;
-
-        template<template<typename>typename P>
-        using filter = lazy<L, F, FL..., typename bind_template<fmp::filter, P>::type>;
+        using reverse = lazy<L, F, FL..., bind<fmp::reverse>::template type>;
 
         template<template<typename>typename P>
-        using transform = lazy<L, F, FL..., typename bind_template<fmp::transform, P>::type>;
+        using filter = lazy<L, F, FL..., bind_template<fmp::filter, P>::template type>;
+
+        template<template<typename>typename P>
+        using transform = lazy<L, F, FL..., bind_template<fmp::transform, P>::template type>;
 
         template<typename... Ls>
-        using concat = lazy<L, F, FL..., typename bind<fmp::concat, Ls...>::type>;
+        using concat = lazy<L, F, FL..., bind<fmp::concat, Ls...>::template type>;
 
         template<typename... Ts>
-        using append = lazy<L, F, FL..., typename bind<fmp::append, Ts...>::type>;
+        using append = lazy<L, F, FL..., bind<fmp::append, Ts...>::template type>;
 
-        using join = lazy<L, F, FL..., typename bind<fmp::join>::type>;
+        using join = lazy<L, F, FL..., bind<fmp::join>::template type>;
 
         template<template<typename...>typename C>
-        using to = lazy<L, F, FL..., typename bind_template<fmp::to, C>::type>;
+        using to = lazy<L, F, FL..., bind_template<fmp::to, C>::template type>;
 
-        using head = lazy<L, F, FL..., typename bind<fmp::head>::type>;
+        using head = lazy<L, F, FL..., bind<fmp::head>::template type>;
 
-        using tail = lazy<L, F, FL..., typename bind<fmp::tail>::type>;
+        using tail = lazy<L, F, FL..., bind<fmp::tail>::template type>;
 
         template<long idx>
-        using at = lazy<L, F, FL..., typename bind_value<fmp::at, idx>::type>;
+        using at = lazy<L, F, FL..., bind_value<fmp::at, idx>::template type>;
 
         template<typename S>
-        using order = lazy<L, F, FL..., typename bind<fmp::order, S>::type>;
+        using order = lazy<L, F, FL..., bind<fmp::order, S>::template type>;
 
-        using type = lazy<typename F<L>::type, FL...>::type;
+        using type = typename lazy<typename F<L>::type, FL...>::type;
+
+        template<typename T>
+        constexpr static auto count = fmp::count<type, T>::value;
+
+        template<template<typename>typename F>
+        constexpr static auto count_if = fmp::count_if<type, F>::value;
 
         constexpr static auto size = fmp::size<type>::value;
 
@@ -82,57 +88,63 @@ namespace fmp
     struct lazy<L>
     {
         template<long start, long end, long step = 1>
-        using range = lazy<L, typename bind_value<fmp::range, start, end, step>::type>;
+        using range = lazy<L, bind_value<fmp::range, start, end, step>::template type>;
 
         template<long count>
-        using take = lazy<L, typename bind_value<fmp::take, count>::type>;
+        using take = lazy<L, bind_value<fmp::take, count>::template type>;
 
         template<long count>
-        using drop = typename lazy<L, typename bind_value<fmp::drop, count>::type>;
+        using drop = lazy<L, bind_value<fmp::drop, count>::template type>;
 
         template<template<typename, typename>typename P, typename I>
-        using fold = typename lazy<L, typename bind_template<fmp::fold, P, I>::type>;
+        using fold = lazy<L, bind_template<fmp::fold, P, I>::template type>;
 
         template<typename T>
-        using push_back = lazy<L, typename bind<fmp::push_back, T>::type>;
+        using push_back = lazy<L, bind<fmp::push_back, T>::template type>;
 
         template<typename T>
-        using push_front = lazy<L, typename bind<fmp::push_front, T>::type>;
+        using push_front = lazy<L, bind<fmp::push_front, T>::template type>;
 
-        using pop_back = lazy<L, typename bind<fmp::pop_back>::type>;
+        using pop_back = lazy<L, bind<fmp::pop_back>::template type>;
 
-        using pop_front = lazy<L, typename bind<fmp::pop_front>::type>;
+        using pop_front = lazy<L, bind<fmp::pop_front>::template type>;
 
-        using reverse = lazy<L, typename bind<fmp::reverse>::type>;
-
-        template<template<typename>typename P>
-        using filter = lazy<L, typename bind_template<fmp::filter, P>::type>;
+        using reverse = lazy<L, bind<fmp::reverse>::template type>;
 
         template<template<typename>typename P>
-        using transform = lazy<L, typename bind_template<fmp::transform, P>::type>;
+        using filter = lazy<L, bind_template<fmp::filter, P>::template type>;
+
+        template<template<typename>typename P>
+        using transform = lazy<L, bind_template<fmp::transform, P>::template type>;
 
         template<typename... Ls>
-        using concat = lazy<L, typename bind<fmp::concat, Ls...>::type>;
+        using concat = lazy<L, bind<fmp::concat, Ls...>::template type>;
 
         template<typename... Ts>
-        using append = lazy<L, typename bind<fmp::append, Ts...>::type>;
+        using append = lazy<L, bind<fmp::append, Ts...>::template type>;
 
-        using join = lazy<L, typename bind<fmp::join>::type>;
+        using join = lazy<L, bind<fmp::join>::template type>;
 
         template<template<typename...>typename C>
-        using to = lazy<L, typename bind_template<fmp::to, C>::type>;
+        using to = lazy<L, bind_template<fmp::to, C>::template type>;
 
-        using head = lazy<L, typename bind<fmp::head>::type>;
+        using head = lazy<L, bind<fmp::head>::template type>;
 
-        using tail = lazy<L, typename bind<fmp::tail>::type>;
+        using tail = lazy<L, bind<fmp::tail>::template type>;
 
         template<long idx>
-        using at = lazy<L, typename bind_value<fmp::at, idx>::type>;
+        using at = lazy<L, bind_value<fmp::at, idx>::template type>;
 
         template<typename S>
-        using order = lazy<L, typename bind<fmp::order, S>::type>;
+        using order = lazy<L, bind<fmp::order, S>::template type>;
 
         using type = L;
+
+        template<typename T>
+        constexpr static auto count = fmp::count<type, T>::value;
+
+        template<template<typename>typename F>
+        constexpr static auto count_if = fmp::count_if<type, F>::value;
 
         constexpr static auto size = fmp::size<type>::value;
 
